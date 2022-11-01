@@ -45,7 +45,7 @@ class ConvGRUMod(nn.Module):
     def forward(self, x, h):
 
         if h is None:
-            r = torch.sigmoid(self.conv_ir(x) * self.conv_hr(x))
+            r = torch.sigmoid(self.conv_ir(x))
             n = r * torch.tanh(self.conv_in(x))
             h = n
         else:
