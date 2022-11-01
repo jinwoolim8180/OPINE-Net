@@ -144,9 +144,5 @@ for epoch_i in range(start_epoch+1, end_epoch+1):
     output_data = "[%02d/%02d] Total Loss: %.4f, Discrepancy Loss: %.4f, Symmetry Loss: %.4f, Orth Loss: %.4f\n" % (epoch_i, end_epoch, loss_all.item(), loss_discrepancy.item(), loss_symmetry.item(), loss_orth.item())
     print(output_data)
 
-    output_file = open(log_file_name, 'a')
-    output_file.write(output_data)
-    output_file.close()
-
     if epoch_i % args.save_interval == 0:
         torch.save(model.state_dict(), "./%s/net_params_%d.pkl" % (model_dir, epoch_i))  # save only the parameters
