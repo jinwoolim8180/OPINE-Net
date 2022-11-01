@@ -34,13 +34,13 @@ class ConvGRUMod(nn.Module):
     def __init__(self, inp_dim, oup_dim):
         super().__init__()
         self.conv_ir = nn.Conv2d(inp_dim, oup_dim, 3, padding=1)
-        self.conv_hr = nn.Conv2d(inp_dim, oup_dim, 3, padding=1)
+        self.conv_hr = nn.Conv2d(oup_dim, oup_dim, 3, padding=1)
 
         self.conv_iz = nn.Conv2d(inp_dim, oup_dim, 3, padding=1)
-        self.conv_hz = nn.Conv2d(inp_dim, oup_dim, 3, padding=1)
+        self.conv_hz = nn.Conv2d(oup_dim, oup_dim, 3, padding=1)
 
         self.conv_in = nn.Conv2d(inp_dim, oup_dim, 3, padding=1)
-        self.conv_hn = nn.Conv2d(inp_dim, oup_dim, 3, padding=1)
+        self.conv_hn = nn.Conv2d(oup_dim, oup_dim, 3, padding=1)
 
     def forward(self, x, h):
 
