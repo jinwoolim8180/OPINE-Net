@@ -8,7 +8,7 @@ import os
 from torch.utils.data import Dataset, DataLoader
 import platform
 from argparse import ArgumentParser
-from models import OPINENetplus
+from simple import OPINENetplus
 import models
 from tqdm import tqdm
 
