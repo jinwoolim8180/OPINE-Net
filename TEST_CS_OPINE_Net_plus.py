@@ -11,7 +11,7 @@ import math
 from torch.nn import init
 import copy
 import cv2
-from skimage.measure import compare_ssim as ssim
+from skimage.metrics import structural_similarity as ssim
 from argparse import ArgumentParser
 from utility_for_opinenet import *
 from models import OPINENetplus
