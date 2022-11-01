@@ -10,6 +10,7 @@ import platform
 from argparse import ArgumentParser
 from models import OPINENetplus
 import models
+from tqdm import tqdm
 
 parser = ArgumentParser(description='OPINE-Net-plus')
 
@@ -113,7 +114,7 @@ Eye_I = torch.eye(n_input).to(device)
 
 # Training loop
 for epoch_i in range(start_epoch+1, end_epoch+1):
-    for data in rand_loader:
+    for data in tqdm(rand_loader):
 
         batch_x = data.view(-1, 1, 33, 33)
         batch_x = batch_x.to(device)
