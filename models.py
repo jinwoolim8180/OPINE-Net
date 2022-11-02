@@ -7,7 +7,7 @@ import numpy as np
 import os
 
 ratio_dict = {1: 10, 4: 43, 10: 109, 25: 272, 30: 327, 40: 436, 50: 545}
-cs_ratio = 10
+cs_ratio = 25
 n_input = ratio_dict[cs_ratio]
 n_output = 1089
 nrtrain = 88912   # number of training blocks
