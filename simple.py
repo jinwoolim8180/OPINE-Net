@@ -7,8 +7,6 @@ import numpy as np
 import os
 
 ratio_dict = {1: 10, 4: 43, 10: 109, 25: 272, 30: 327, 40: 436, 50: 545}
-cs_ratio = 10
-n_input = ratio_dict[cs_ratio]
 n_output = 1089
 nrtrain = 88912   # number of training blocks
 batch_size = 64
@@ -115,7 +113,7 @@ class BasicBlock(torch.nn.Module):
 class OPINENetplus(torch.nn.Module):
     def __init__(self, LayerNo, n_input):
         super(OPINENetplus, self).__init__()
-
+        self.n_input = n_input
         self.Phi = nn.Parameter(init.xavier_normal_(torch.Tensor(n_input, 1089)))
         self.Phi_scale = nn.Parameter(torch.Tensor([0.01]))
 
@@ -132,11 +130,11 @@ class OPINENetplus(torch.nn.Module):
         # Sampling-subnet
         Phi_ = MyBinarize(self.Phi)
         Phi = self.Phi_scale * Phi_
-        PhiWeight = Phi.contiguous().view(n_input, 1, 33, 33)
+        PhiWeight = Phi.contiguous().view(self.n_input, 1, 33, 33)
         Phix = F.conv2d(x, PhiWeight, padding=0, stride=33, bias=None)    # Get measurements
 
         # Initialization-subnet
-        PhiTWeight = Phi.t().contiguous().view(n_output, n_input, 1, 1)
+        PhiTWeight = Phi.t().contiguous().view(n_output, self.n_input, 1, 1)
         PhiTb = F.conv2d(Phix, PhiTWeight, padding=0, bias=None)
         PhiTb = torch.nn.PixelShuffle(33)(PhiTb)
         x = PhiTb    # Conduct initialization
