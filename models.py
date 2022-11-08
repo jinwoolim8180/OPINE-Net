@@ -82,19 +82,19 @@ class BasicBlock(torch.nn.Module):
         x_input = x
 
         x_D = F.conv2d(x_input, self.conv_D, padding=1)
-        x_D, h1 = self.gru1(x_D, h1)
 
         x = F.conv2d(x_D, self.conv1_forward, padding=1)
         x = F.relu(x)
         x_forward = F.conv2d(x, self.conv2_forward, padding=1)
+        x_forward, h1 = self.gru1(x_forward, h1)
 
         x = torch.mul(torch.sign(x_forward), F.relu(torch.abs(x_forward) - self.soft_thr))
+
+        x, h2 = self.gru2(x, h2)
 
         x = F.conv2d(x, self.conv1_backward, padding=1)
         x = F.relu(x)
         x_backward = F.conv2d(x, self.conv2_backward, padding=1)
-
-        x_backward, h2 = self.gru2(x_backward, h2)
 
         x = F.conv2d(F.relu(x_backward), self.conv1_G, padding=1)
         x = F.conv2d(F.relu(x), self.conv2_G, padding=1)
