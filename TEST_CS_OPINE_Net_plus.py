@@ -69,7 +69,7 @@ optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 model_dir = "./%s/CS_OPINE_Net_plus_layer_%d_group_%d_ratio_%d" % (args.model_dir, layer_num, group_num, cs_ratio)
 
 # Load pre-trained model with epoch number
-model.load_state_dict(torch.load('./%s/net_params_%d.pkl' % (model_dir, epoch_num), map_location=torch.device('cpu')))
+model.load_state_dict(torch.load('./%s/net_params_%d.pkl' % (model_dir, epoch_num)))
 
 test_dir = os.path.join(args.data_dir, test_name)
 filepaths = glob.glob(test_dir + '/*.tif')
