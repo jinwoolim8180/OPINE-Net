@@ -14,7 +14,7 @@ import cv2
 from skimage.metrics import structural_similarity as ssim
 from argparse import ArgumentParser
 from utility_for_opinenet import *
-from simple import OPINENetplus
+from original import OPINENetplus
 import models
 
 parser = ArgumentParser(description='OPINE-Net-plus')
